@@ -7,7 +7,7 @@ script:
   - docker run ajaypati/docker-react npm run test -- --coverage
 after_success:
   - docker build -t ajaypati/kubdocker-client .
-  # login to docker CLI and push this images to dockerHub
+  # login to docker CLI and push this images to dockerHub to deploy to kubernetes
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push ajaypati/kubdocker-client
 
