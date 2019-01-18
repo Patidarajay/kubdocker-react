@@ -10,8 +10,18 @@ after_success:
   # login to docker CLI and push this image to dockerHub to deploy to kubernetes
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push ajaypati/kubdocker-client
-
-
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-kube"
+  env: "DockerKube-env"
+  bucket_name: "elasticbeanstalk-us-east-1-703745605407"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
 
 
 
